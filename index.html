@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#005EB6" />
+  <meta name="description" content="Descubra o melhor caminho acadêmico para seu filho estudar nos EUA com a Impacto Acadêmico." />
+  <title>Impacto Acadêmico | Quiz Educação nos EUA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <noscript>
+    <div class="noscript">Para responder ao quiz, ative o JavaScript no navegador.</div>
+  </noscript>
+
+  <main class="page-shell">
+    <section class="quiz-app" aria-live="polite">
+      <header class="quiz-header" id="quiz-header" hidden>
+        <button class="back-button" id="back-button" type="button" aria-label="Voltar">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.7 4.7 7.4 10l5.3 5.3" /></svg>
+        </button>
+        <div class="progress" aria-hidden="true">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <span class="progress-label" id="progress-label">1 de 10</span>
+      </header>
+
+      <div class="screen active" id="screen-root"></div>
+    </section>
+  </main>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
