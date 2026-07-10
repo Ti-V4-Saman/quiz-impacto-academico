@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { CONFIG } from '../config.js';
 
 const TRANSIENT_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
@@ -75,6 +76,20 @@ export async function postJson(url, payload, options = {}) {
   }
 
   throw lastError || new HttpRequestError('Falha desconhecida ao enviar o webhook.');
+=======
+export async function postJson(url, payload, options = {}) {
+  if (!url) return { ok: false, skipped: true };
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    keepalive: options.keepalive ?? true
+  });
+
+  const body = await safeJson(response);
+  return { ok: response.ok, status: response.status, body };
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 }
 
 async function safeJson(response) {
@@ -86,6 +101,7 @@ async function safeJson(response) {
     return { raw: text };
   }
 }
+<<<<<<< HEAD
 
 function sleep(ms) {
   return new Promise((resolve) => window.setTimeout(resolve, ms));
@@ -94,3 +110,5 @@ function sleep(ms) {
 function withJitter(ms) {
   return Math.round(ms * (0.8 + Math.random() * 0.4));
 }
+=======
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494

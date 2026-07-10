@@ -267,6 +267,7 @@ Esta versão prioriza UX mobile sem rolagem nas telas principais do quiz. Foram 
 - Campo de país de residência alterado para dropdown com múltiplos países.
 - Todos os caminhos do funil direcionam para o agendamento da free consultation.
 - Última tela com aviso de que não será possível realizar novo agendamento após concluir.
+<<<<<<< HEAD
 
 ## Correções de robustez desta entrega
 
@@ -282,3 +283,5 @@ Esta versão prioriza UX mobile sem rolagem nas telas principais do quiz. Foram 
 ### Contrato esperado pelo n8n corrigido
 
 O workflow deve respeitar `eventId`, `eventVersion`, `resultId`, `updatedAt` e `isCompleted`. Eventos antigos e parciais posteriores ao final são descartados pelo workflow entregue junto com este projeto.
+=======
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494

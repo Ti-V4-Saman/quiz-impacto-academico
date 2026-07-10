@@ -1,6 +1,10 @@
 import { CONFIG } from '../config.js';
 import { ANSWER_KEYS, TRACKING_KEYS } from '../constants.js';
+<<<<<<< HEAD
 import { nextEventVersion, nextPartialSeq, state } from '../state.js';
+=======
+import { state } from '../state.js';
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 import { getPhoneCountryConfig, normalizePhone } from '../utils/phone.js';
 import { getFullUrl, hydrateFacebookBrowserIds } from '../utils/utms.js';
 import { postJson } from './api.js';
@@ -15,16 +19,20 @@ export function buildPayload(finalStatus = 'partial', extra = {}) {
   const tracking = buildTracking();
   const fullUrl = getFullUrl();
   const isCompleted = finalStatus !== 'partial';
+<<<<<<< HEAD
   const partialSeq = isCompleted ? null : (extra.partialSeq ?? nextPartialSeq());
   const eventVersion = extra.eventVersion ?? nextEventVersion();
   const eventName = extra.eventName || finalStatus;
   const eventId = isCompleted
     ? `${state.resultId}:final:${finalStatus}`
     : `${state.resultId}:partial:${partialSeq}`;
+=======
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
   const variables = buildVariables(answerMap, tracking, fullUrl);
   const queryParams = buildWebhookQueryParams(finalStatus, isCompleted);
 
   return {
+<<<<<<< HEAD
     eventId,
     eventVersion,
     resultId: state.resultId,
@@ -32,6 +40,12 @@ export function buildPayload(finalStatus = 'partial', extra = {}) {
     isCompleted,
     eventName,
     finalStatus,
+=======
+    resultId: state.resultId,
+    sessionId: state.sessionId,
+    isCompleted,
+    eventName: extra.eventName || finalStatus,
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
     createdAt: state.createdAt,
     updatedAt: now,
     typebot: {
@@ -52,11 +66,16 @@ export function buildPayload(finalStatus = 'partial', extra = {}) {
       userAgent: navigator.userAgent,
       generatedAt: now
     },
+<<<<<<< HEAD
     partialSeq
+=======
+    partialSeq: extra.partialSeq || null
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
   };
 }
 
 export async function sendFinalResults(finalStatus) {
+<<<<<<< HEAD
   if (!state.finalPayload || state.finalPayload.finalStatus !== finalStatus) {
     state.finalPayload = buildPayload(finalStatus, { eventName: finalStatus });
   }
@@ -77,17 +96,36 @@ export async function sendPartialResults(eventName = 'partial') {
   }
 
   const payload = buildPayload('partial', { eventName });
+=======
+  const payload = buildPayload(finalStatus, { eventName: finalStatus });
+  if (!CONFIG.ENABLE_WEBHOOKS || !CONFIG.WEBHOOKS.FINAL_RESULTS_URL) {
+    return { ok: true, skipped: true, reason: 'webhooks_disabled', payload };
+  }
+  const url = buildUrlWithQuery(CONFIG.WEBHOOKS.FINAL_RESULTS_URL, payload.queryParams);
+  return postJson(url, payload);
+}
+
+export async function sendPartialResults(eventName = 'partial') {
+  const payload = buildPayload('partial', {
+    eventName,
+    partialSeq: ++state.partialSeq
+  });
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 
   if (!CONFIG.ENABLE_WEBHOOKS || !CONFIG.WEBHOOKS.PARTIAL_RESULTS_URL) {
     return { ok: true, skipped: true, reason: 'webhooks_disabled', payload };
   }
 
   const url = buildUrlWithQuery(CONFIG.WEBHOOKS.PARTIAL_RESULTS_URL, payload.queryParams);
+<<<<<<< HEAD
   return postJson(url, payload, {
     idempotencyKey: payload.eventId,
     maxRetries: 1,
     keepalive: false
   });
+=======
+  return postJson(url, payload);
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 }
 
 function buildAnswers() {
@@ -147,11 +185,18 @@ function buildWebhookQueryParams(finalStatus, isCompleted) {
 }
 
 function buildUrlWithQuery(url, queryParams = {}) {
+<<<<<<< HEAD
   const parsed = new URL(url, window.location.href);
   Object.entries(queryParams)
     .filter(([, value]) => value !== '' && value != null)
     .forEach(([key, value]) => parsed.searchParams.set(key, String(value)));
   return parsed.toString();
+=======
+  const entries = Object.entries(queryParams).filter(([, value]) => value !== '' && value != null);
+  if (!entries.length) return url;
+  const qs = new URLSearchParams(entries).toString();
+  return `${url}?${qs}`;
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 }
 
 function inferAnswerType(key) {

@@ -1,6 +1,7 @@
 import { ANSWER_KEYS, STORAGE_KEYS, TRACKING_KEYS } from './constants.js';
 import { getOrCreateId } from './utils/ids.js';
 
+<<<<<<< HEAD
 function clearCompletedSession() {
   if (sessionStorage.getItem(STORAGE_KEYS.completed) !== 'true') return;
   Object.values(STORAGE_KEYS).forEach((key) => sessionStorage.removeItem(key));
@@ -11,6 +12,8 @@ function readCounter(key) {
   return Number.isFinite(value) && value >= 0 ? value : 0;
 }
 
+=======
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 function emptyAnswers() {
   return ANSWER_KEYS.reduce((acc, key) => {
     acc[key] = '';
@@ -28,8 +31,11 @@ function emptyTracking() {
   }, {});
 }
 
+<<<<<<< HEAD
 clearCompletedSession();
 
+=======
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
 export const state = {
   sessionId: getOrCreateId(STORAGE_KEYS.sessionId, 'session'),
   resultId: getOrCreateId(STORAGE_KEYS.resultId, 'result'),
@@ -40,6 +46,7 @@ export const state = {
   answers: emptyAnswers(),
   tracking: emptyTracking(),
   isSubmitting: false,
+<<<<<<< HEAD
   isCompleted: false,
   finalStatus: '',
   finalRedirectUrl: '',
@@ -67,3 +74,11 @@ export function markQuizCompleted() {
   state.isCompleted = true;
   sessionStorage.setItem(STORAGE_KEYS.completed, 'true');
 }
+=======
+  finalStatus: '',
+  finalRedirectUrl: '',
+  partialSeq: 0
+};
+
+sessionStorage.setItem(STORAGE_KEYS.createdAt, state.createdAt);
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
