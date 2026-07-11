@@ -15,11 +15,22 @@ export const STORAGE_KEYS = {
   sessionId: 'impacto_academico_session_id',
   resultId: 'impacto_academico_result_id',
   createdAt: 'impacto_academico_created_at',
+<<<<<<< HEAD
   leadEventSent: 'impacto_academico_lead_event_sent',
   basicContactFingerprint: 'impacto_academico_basic_contact_fingerprint',
   partialSeq: 'impacto_academico_partial_seq',
   eventVersion: 'impacto_academico_event_version',
   completed: 'impacto_academico_completed'
+=======
+<<<<<<< HEAD
+  leadEventSent: 'impacto_academico_lead_event_sent',
+  partialSeq: 'impacto_academico_partial_seq',
+  eventVersion: 'impacto_academico_event_version',
+  completed: 'impacto_academico_completed'
+=======
+  leadEventSent: 'impacto_academico_lead_event_sent'
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
 };
 
 export const TYPEBOT_VARIABLES = {

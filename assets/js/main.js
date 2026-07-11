@@ -7,7 +7,15 @@ import { initMetaPixels, trackPageView } from './services/pixel.service.js';
 import { schedulePartialSave } from './services/partial-save.service.js';
 import { saveChoice, saveInput, submitInput } from './quiz/answers.js';
 import { validateField } from './quiz/validation.js';
+<<<<<<< HEAD
 import { goBack, openFinalRedirect, retryFinalSubmission, startQuiz } from './quiz/navigation.js';
+=======
+<<<<<<< HEAD
+import { goBack, openFinalRedirect, retryFinalSubmission, startQuiz } from './quiz/navigation.js';
+=======
+import { goBack, openFinalRedirect, startQuiz } from './quiz/navigation.js';
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
 
 const root = document.getElementById('screen-root');
 const header = document.getElementById('quiz-header');
@@ -66,6 +74,10 @@ export function renderStep(stepId) {
 export function renderFinal(finalStatus, options = {}) {
   header.hidden = true;
   const screen = FINAL_SCREENS[finalStatus] || FINAL_SCREENS.refugo;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
   root.innerHTML = finalTemplate(screen, options);
 
   const button = document.getElementById('final-button');
@@ -73,6 +85,15 @@ export function renderFinal(finalStatus, options = {}) {
 
   const retryButton = document.getElementById('retry-submit-button');
   if (retryButton) retryButton.addEventListener('click', retryFinalSubmission);
+<<<<<<< HEAD
+=======
+=======
+  root.innerHTML = finalTemplate(screen, options.loading);
+
+  const button = document.getElementById('final-button');
+  if (button) button.addEventListener('click', openFinalRedirect);
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
 }
 
 function bindSelectStep(step) {
@@ -426,6 +447,10 @@ function toggleOtherField(wrapper, input, show) {
   }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
 function finalTemplate(screen, options = {}) {
   const loading = Boolean(options.loading);
   const hasError = Boolean(options.error);
@@ -435,6 +460,12 @@ function finalTemplate(screen, options = {}) {
       ? '<button class="final-button" id="retry-submit-button" type="button">Tentar enviar novamente →</button>'
       : `<button class="final-button" id="final-button" type="button">${escapeHtml(screen.buttonLabel)} →</button>`;
 
+<<<<<<< HEAD
+=======
+=======
+function finalTemplate(screen, loading = false) {
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
   return `
     <section class="final-screen">
       <div class="final-badge">${escapeHtml(screen.icon)}</div>
@@ -442,10 +473,22 @@ function finalTemplate(screen, options = {}) {
       <p>${escapeHtml(screen.text)}</p>
       ${screen.note ? `<div class="final-note-box">${escapeHtml(screen.note)}</div>` : ''}
       ${screen.warning ? `<div class="final-warning">${escapeHtml(screen.warning)}</div>` : ''}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
       ${hasError ? `<div class="final-warning">Não conseguimos registrar suas respostas agora. ${escapeHtml(options.errorMessage || '')}</div>` : ''}
       <div class="final-actions">
         ${action}
         <p class="cta-note">${hasError ? 'Mantenha esta página aberta e tente novamente.' : 'Suas respostas foram registradas nesta sessão.'}</p>
+<<<<<<< HEAD
+=======
+=======
+      <div class="final-actions">
+        ${loading ? '<div class="loading-dot" aria-label="Processando respostas"></div>' : `<button class="final-button" id="final-button" type="button">${escapeHtml(screen.buttonLabel)} →</button>`}
+        <p class="cta-note">Suas respostas foram registradas nesta sessão.</p>
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
       </div>
     </section>
   `;
