@@ -1,11 +1,4 @@
 import { CONFIG } from '../config.js';
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
->>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 import { state } from '../state.js';
 import { sendPartialResults } from './results.service.js';
 
@@ -28,24 +21,6 @@ export function schedulePartialSave(eventName = 'partial', options = {}) {
     timer = null;
     if (scheduledGeneration !== generation || state.isSubmitting || state.isCompleted) return;
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-import { sendPartialResults } from './results.service.js';
-
-let timer = null;
-
-export function schedulePartialSave(eventName = 'partial', options = {}) {
-  if (!CONFIG.ENABLE_WEBHOOKS) return;
-
-  window.clearTimeout(timer);
-
-  const run = () => {
->>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
->>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
->>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
     sendPartialResults(eventName).catch((error) => {
       if (CONFIG.DEBUG) console.error('Erro ao salvar parcial', error);
     });

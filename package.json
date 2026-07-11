@@ -1,0 +1,18 @@
+{
+  "name": "impacto-academico-quiz",
+  "version": "10.0.0",
+  "private": true,
+  "description": "Quiz estático da Impacto Acadêmico com build validado para GitHub e Vercel.",
+  "type": "module",
+  "scripts": {
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
