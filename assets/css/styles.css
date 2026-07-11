@@ -1796,6 +1796,7 @@ img { max-width: 100%; display: block; }
 .conditional-field .phone-help {
   margin-top: 0;
 }
+<<<<<<< HEAD
 
 /* ===== V9 estabilidade e fallback visível ===== */
 .runtime-error {
@@ -1839,3 +1840,5 @@ img { max-width: 100%; display: block; }
   max-width: 360px;
   margin-top: 6px;
 }
+=======
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2

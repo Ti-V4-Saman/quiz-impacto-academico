@@ -26,6 +26,7 @@ export function getFullUrl() {
 }
 
 function readCookie(name) {
+<<<<<<< HEAD
   try {
     const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const cookieString = document.cookie || '';
@@ -43,4 +44,14 @@ function writeCookie(name, value, days) {
   } catch {
     // Cookies podem ser bloqueados em previews ou iframes restritos.
   }
+=======
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = document.cookie.match(new RegExp(`(?:^|; )${escaped}=([^;]*)`));
+  return match ? decodeURIComponent(match[1]) : '';
+}
+
+function writeCookie(name, value, days) {
+  const expires = new Date(Date.now() + days * 864e5).toUTCString();
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}; expires=${expires}; path=/; SameSite=Lax`;
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 }

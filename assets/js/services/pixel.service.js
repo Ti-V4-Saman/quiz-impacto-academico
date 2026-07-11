@@ -1,6 +1,9 @@
 import { CONFIG } from '../config.js';
 import { STORAGE_KEYS } from '../constants.js';
+<<<<<<< HEAD
 import { safeSessionStorage } from '../utils/storage.js';
+=======
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 
 export function initMetaPixels() {
   if (!Array.isArray(CONFIG.META_PIXEL_IDS) || CONFIG.META_PIXEL_IDS.length === 0) return;
@@ -24,11 +27,19 @@ export function trackPageView() {
 }
 
 export function trackLeadOnce(data = {}) {
+<<<<<<< HEAD
   if (safeSessionStorage.getItem(STORAGE_KEYS.leadEventSent) === '1') return;
 
   if (window.fbq) window.fbq('track', 'Lead', data);
   pushDataLayer('Lead', data);
   safeSessionStorage.setItem(STORAGE_KEYS.leadEventSent, '1');
+=======
+  if (sessionStorage.getItem(STORAGE_KEYS.leadEventSent) === '1') return;
+
+  if (window.fbq) window.fbq('track', 'Lead', data);
+  pushDataLayer('Lead', data);
+  sessionStorage.setItem(STORAGE_KEYS.leadEventSent, '1');
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 }
 
 export function pushDataLayer(event, data = {}) {

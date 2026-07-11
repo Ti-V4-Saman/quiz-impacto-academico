@@ -7,7 +7,19 @@ import { initMetaPixels, trackPageView } from './services/pixel.service.js';
 import { schedulePartialSave } from './services/partial-save.service.js';
 import { saveChoice, saveInput, submitInput } from './quiz/answers.js';
 import { validateField } from './quiz/validation.js';
+<<<<<<< HEAD
 import { configureNavigation, goBack, openFinalRedirect, retryFinalSubmission, startQuiz } from './quiz/navigation.js';
+=======
+<<<<<<< HEAD
+import { goBack, openFinalRedirect, retryFinalSubmission, startQuiz } from './quiz/navigation.js';
+=======
+<<<<<<< HEAD
+import { goBack, openFinalRedirect, retryFinalSubmission, startQuiz } from './quiz/navigation.js';
+=======
+import { goBack, openFinalRedirect, startQuiz } from './quiz/navigation.js';
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 
 const root = document.getElementById('screen-root');
 const header = document.getElementById('quiz-header');
@@ -16,6 +28,7 @@ const progressBar = document.getElementById('progress-bar');
 const progressLabel = document.getElementById('progress-label');
 
 const TOTAL_PROGRESS = 10;
+<<<<<<< HEAD
 let initialized = false;
 let fatalErrorVisible = false;
 
@@ -59,11 +72,24 @@ function assertRequiredElements() {
   }
 }
 
+=======
+
+document.addEventListener('DOMContentLoaded', () => {
+  hydrateTrackingFromUrl();
+  initMetaPixels();
+  trackPageView();
+  schedulePartialSave('page_started', { immediate: true });
+  bindChromeEvents();
+  renderStep('hero');
+});
+
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 function bindChromeEvents() {
   backButton.addEventListener('click', goBack);
 }
 
 export function renderStep(stepId) {
+<<<<<<< HEAD
   try {
     fatalErrorVisible = false;
     const step = QUIZ_STEPS[stepId] || QUIZ_STEPS.hero;
@@ -103,10 +129,42 @@ export function renderStep(stepId) {
     throw new Error(`Tipo de etapa não suportado: ${step.type}`);
   } catch (error) {
     renderRuntimeError(error, 'Não foi possível exibir esta pergunta.');
+=======
+  const step = QUIZ_STEPS[stepId] || QUIZ_STEPS.hero;
+  updateChrome(step);
+
+  if (step.type === 'hero') {
+    root.innerHTML = heroTemplate();
+    document.getElementById('start-button').addEventListener('click', startQuiz);
+    return;
+  }
+
+  if (step.type === 'choice') {
+    root.innerHTML = choiceTemplate(step);
+    root.querySelectorAll('[data-choice]').forEach((button) => {
+      button.addEventListener('click', () => {
+        button.classList.add('is-selected');
+        saveChoice(step.field, button.dataset.value);
+      });
+    });
+    return;
+  }
+
+  if (step.type === 'select') {
+    root.innerHTML = selectTemplate(step);
+    bindSelectStep(step);
+    return;
+  }
+
+  if (step.type === 'input') {
+    root.innerHTML = inputTemplate(step);
+    bindInputStep(step);
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
   }
 }
 
 export function renderFinal(finalStatus, options = {}) {
+<<<<<<< HEAD
   try {
     fatalErrorVisible = false;
     header.hidden = true;
@@ -142,6 +200,30 @@ function renderRuntimeError(error, userMessage) {
   document.getElementById('reload-quiz-button')?.addEventListener('click', () => {
     window.location.reload();
   });
+=======
+  header.hidden = true;
+  const screen = FINAL_SCREENS[finalStatus] || FINAL_SCREENS.refugo;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+  root.innerHTML = finalTemplate(screen, options);
+
+  const button = document.getElementById('final-button');
+  if (button) button.addEventListener('click', openFinalRedirect);
+
+  const retryButton = document.getElementById('retry-submit-button');
+  if (retryButton) retryButton.addEventListener('click', retryFinalSubmission);
+<<<<<<< HEAD
+=======
+=======
+  root.innerHTML = finalTemplate(screen, options.loading);
+
+  const button = document.getElementById('final-button');
+  if (button) button.addEventListener('click', openFinalRedirect);
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 }
 
 function bindSelectStep(step) {
@@ -495,6 +577,13 @@ function toggleOtherField(wrapper, input, show) {
   }
 }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
 function finalTemplate(screen, options = {}) {
   const loading = Boolean(options.loading);
   const hasError = Boolean(options.error);
@@ -504,6 +593,15 @@ function finalTemplate(screen, options = {}) {
       ? '<button class="final-button" id="retry-submit-button" type="button">Tentar enviar novamente →</button>'
       : `<button class="final-button" id="final-button" type="button">${escapeHtml(screen.buttonLabel)} →</button>`;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+function finalTemplate(screen, loading = false) {
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
   return `
     <section class="final-screen">
       <div class="final-badge">${escapeHtml(screen.icon)}</div>
@@ -511,10 +609,28 @@ function finalTemplate(screen, options = {}) {
       <p>${escapeHtml(screen.text)}</p>
       ${screen.note ? `<div class="final-note-box">${escapeHtml(screen.note)}</div>` : ''}
       ${screen.warning ? `<div class="final-warning">${escapeHtml(screen.warning)}</div>` : ''}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
       ${hasError ? `<div class="final-warning">Não conseguimos registrar suas respostas agora. ${escapeHtml(options.errorMessage || '')}</div>` : ''}
       <div class="final-actions">
         ${action}
         <p class="cta-note">${hasError ? 'Mantenha esta página aberta e tente novamente.' : 'Suas respostas foram registradas nesta sessão.'}</p>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+      <div class="final-actions">
+        ${loading ? '<div class="loading-dot" aria-label="Processando respostas"></div>' : `<button class="final-button" id="final-button" type="button">${escapeHtml(screen.buttonLabel)} →</button>`}
+        <p class="cta-note">Suas respostas foram registradas nesta sessão.</p>
+>>>>>>> d3d3880abb39b317b80fc1521e707c08c5c29494
+>>>>>>> 633d536e8834b1d696353ab96dd64c55b8acfe2e
+>>>>>>> 476e01f94e7beca568a91de7e39f46c2053328b2
       </div>
     </section>
   `;
