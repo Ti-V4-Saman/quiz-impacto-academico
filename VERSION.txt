@@ -1,0 +1,7 @@
+10.0.0 — GitHub/Vercel stable build
+
+- Remove artefatos de merge antes do deploy.
+- Impede publicação quando existem marcadores de conflito.
+- Gera bundle e pasta dist automaticamente.
+- Usa assets V10 para evitar mistura com cache antigo.
+- Mantém payloads partial, basic_contact e calendar_final.
